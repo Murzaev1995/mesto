@@ -1,0 +1,6 @@
+.element__bar{
+    display: flex;
+    justify-content: space-between;
+    max-width: 87.23%;
+    margin: 25px auto 31px;
+}

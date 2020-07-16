@@ -1,0 +1,27 @@
+.modal__clouse-button{
+    background-image: url(../../../image/Close\ Icon.svg);
+    object-fit: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: opacity 0.2s ease-in-out;
+    position: relative;
+    top: -40px;
+    left: 430px;
+    width: 40.7px;
+    height: 40.7px;
+}
+.modal__clouse-button:hover{
+    opacity: 0.6;
+}
+@media screen and (max-width: 560px){
+    .modal__clouse-button{
+        top: -37px;
+        left: 250px;
+    }
+    
+}

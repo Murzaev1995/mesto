@@ -1,0 +1,20 @@
+
+@import url(./__container/modal__container.css);
+@import url(./__clouse-button/modal__clouse-button.css);
+
+.modal{
+    background: #00000080;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (max-width: 560px){
+    .modal{
+        align-items: flex-end;
+    }
+}
