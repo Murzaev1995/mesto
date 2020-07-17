@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     max-width: 400px;
     align-items: baseline;
+    
 }
 @media screen and (max-width: 920px){
     .profile-info{

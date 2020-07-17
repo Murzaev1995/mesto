@@ -9,7 +9,7 @@ const textValue = document.querySelector('.form__item_text');
 function OpenModal () {
     modal.classList.add ('modal_opened');
     nameValue.value = name.textContent;
-    textValue.value = text.textContent
+    textValue.value = text.textContent;
     
     
 
