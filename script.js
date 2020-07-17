@@ -3,20 +3,23 @@ const ClouseModalButton = document.querySelector('.modal__clouse-button');
 const modal = document.querySelector('.modal');
 const name = document.querySelector('.profile-info__title');
 const text = document.querySelector('.profile-info__subtitle');
-const nameValue = document.querySelector('.form__name');
-const textValue = document.querySelector('.form__text');
+const nameValue = document.querySelector('.form__item_name');
+const textValue = document.querySelector('.form__item_text');
 
 function OpenModal () {
-    modal.classList.add ('modal__opened');
+    modal.classList.add ('modal_opened');
+    nameValue.value = name.textContent;
+    textValue.value = text.textContent
+    
     
 
 }
-OpenModelButton.addEventListener('click', OpenModal);
+
 
 function ClouseModal () {
-    modal.classList.remove ('modal__opened');
+    modal.classList.remove ('modal_opened');
 }
-ClouseModalButton.addEventListener('click', ClouseModal);
+
 
 
 
@@ -35,9 +38,11 @@ function formSubmitHandler (evt) {
 
     name.textContent = nameValue.value;
     text.textContent = textValue.value;
-    ClouseModal()
+    ClouseModal();
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
+OpenModelButton.addEventListener('click', OpenModal);
+ClouseModalButton.addEventListener('click', ClouseModal);
 formElement.addEventListener('submit', formSubmitHandler);
