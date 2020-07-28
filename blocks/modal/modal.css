@@ -1,6 +1,10 @@
 
 @import url(./__container/modal__container.css);
 @import url(./__clouse-button/modal__clouse-button.css);
+@import url(./__img-container/modal__img-container.css);
+@import url(./__img/modal__img.css);
+@import url(./__signature/modal__signature.css);
+
 
 .modal{
     background: #00000080;
