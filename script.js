@@ -1,9 +1,13 @@
+// Объявил переменные редактирующей модалки
 const modalEdit = document.querySelector('.modal_edit-profile');
+const openModelButton = document.querySelector('.profile-info__edit-button');
+const closeModalButton = document.querySelector('.modal__close-button');
+
+// Объявил переменные добавляющей модалки
 const modalAdd = document.querySelector('.modal_add-card');
-const OpenModelButton = document.querySelector('.profile-info__edit-button');
-const ClouseModalButton = document.querySelector('.modal__clouse-button');
-const OpenModalAddButton = document.querySelector('.profile__add-button');
-const ClouseModalAddButton = modalAdd.querySelector('.modal__clouse-button');
+const openModalAddButton = document.querySelector('.profile__add-button');
+const closeModalAddButton = modalAdd.querySelector('.modal__close-button');
+
 const name = document.querySelector('.profile-info__title');
 const text = document.querySelector('.profile-info__subtitle');
 // находим input редактирующей формы
@@ -13,52 +17,49 @@ const textValue = modalEdit.querySelector('.form__item_text');
 const designationValue = modalAdd.querySelector('.form__item_designation');
 const linkValue = modalAdd.querySelector('.form__item_link');
 // находим 3 модалку
-const modalImg = document.querySelector('.modal_pic')
-const clousePic = modalImg.querySelector('.modal__clouse-button')
+const modalImg = document.querySelector('.modal_pic');
+const closePic = modalImg.querySelector('.modal__close-button');
+const cardTemplate = document.querySelector('.template-card').content.querySelector('.element');
+const cardImageModal = document.querySelector('.modal__img');
+const cardSignatureModal = document.querySelector('.modal__signature');
 
 // открытие и закрытие редактирующей формы
-function OpenModal () {
-    modalEdit.classList.add ('modal_opened');
-    nameValue.value = name.textContent;
-    textValue.value = text.textContent;
-}
-
-function ClouseModal () {
-    modalEdit.classList.remove ('modal_opened');
+function toggleEditModal() {
+    modalEdit.classList.toggle('modal_opened')
 }
 
 // открытие и закрытие добавочной формы
-function OpenAddModal () {
-    modalAdd.classList.add ('modal_opened');
-}
-
-function ClouseAddModal () {
-    modalAdd.classList.remove ('modal_opened');
+function toggleAddModal() {
+    modalAdd.classList.toggle('modal_opened')
 }
 // открытие и закрытие картинки
-function OpenPicModal(){
-    modalImg.classList.add('modal_opened')
-}
-function ClousePicModal(){
-    modalImg.classList.remove('modal_opened')
+function togglePicModal(){
+    modalImg.classList.toggle('modal_opened')
 }
 
 
+    nameValue.value = name.textContent;
+    textValue.value = text.textContent;
 
 
 // Добавление карточки
-let formElementAdd = document.querySelector('.modal_add-card');
+const formElementAdd = document.querySelector('.modal_add-card');
 
+const card = document.querySelector('.elements');
+
+function renderCard(data) {
+   
+    card.prepend(createCard(data));
+
+}
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
-    console.log(designationValue.value, linkValue.value)
-    renderCard({name: designationValue.value, link: linkValue.value})
-
-    ClouseAddModal (modalAdd);
+    renderCard({name: designationValue.value, link: linkValue.value});
+    toggleAddModal (modalAdd);
 }
 
 // Находим форму в DOM
-let formElement = document.querySelector('.modal_edit-profile');
+const formElement = document.querySelector('.modal_edit-profile');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -72,15 +73,19 @@ function formSubmitHandler (evt) {
 
     name.textContent = nameValue.value;
     text.textContent = textValue.value;
-    ClouseModal(modalEdit);
+    openCloseModal(modalEdit);
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-OpenModelButton.addEventListener('click', OpenModal);
-OpenModalAddButton.addEventListener('click', OpenAddModal);
-ClouseModalButton.addEventListener('click', ClouseModal);
-ClouseModalAddButton.addEventListener('click', ClouseAddModal);
+
+// Добавил событие открытия и закрытия к редактирующей форме
+openModelButton.addEventListener('click', toggleEditModal);
+closeModalButton.addEventListener('click', toggleEditModal);
+
+// Добавил событие открытия и закрытия к добавляющей форме
+openModalAddButton.addEventListener('click', toggleAddModal);
+closeModalAddButton.addEventListener('click', toggleAddModal);
 
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCardSubmitHandler);
@@ -112,23 +117,17 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-const card = document.querySelector('.elements');
 
-function renderCard(data) {
-   
-    card.prepend(createCard(data));
-
-}
 
 function createCard(data) {
-    const cardTemplate = document.querySelector('.template-card').content.querySelector('.element');
+    
     const cardElement = cardTemplate.cloneNode(true);
     const cardImage = cardElement.querySelector('.element__img');
     const cardTitle = cardElement.querySelector('.element__title');
     const cardLikeButton = cardElement.querySelector('.element__button-like');
     const cardDeleteButton = cardElement.querySelector('.element__button-delete');
-    const cardImageModal = document.querySelector('.modal__img')
-    const cardSignatureModal = document.querySelector('.modal__signature')
+    
+    
     
     
     cardLikeButton.addEventListener('click', function(evt) {
@@ -143,34 +142,20 @@ function createCard(data) {
     cardTitle.textContent = data.name;
     cardImage.src = data.link;
     
+    
     cardImage.addEventListener('click', () => {
         cardImageModal.src = data.link;
         cardSignatureModal.textContent = data.name;
-        toggleModal(modalPicture);
+        cardImage.addEventListener('click', togglePicModal);
       });
 
-      cardImage.addEventListener('click', OpenPicModal);
-      clousePic.addEventListener('click', ClousePicModal);
+      
+      
     return cardElement;
-
-    
-    
-    
-
-  
-    
-    
 }
 
-
+closePic.addEventListener('click', togglePicModal);
 
 initialCards.forEach((data) => {
     renderCard(data);
-
-    
-
 })
-
-
-
-  

@@ -10,9 +10,7 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/modal/modal.css);
 @import url(../blocks/modal/_opened/modal_opened.css);
-@import url(../blocks/modal/_add-opened/modal_add-opened.css);
-@import url(../blocks/modal/_img/modal_img.css);
-@import url(../blocks/modal/__clouse-button/_pic/modal__clouse-button_pic.css);
+@import url(../blocks/modal/__close-button/_pic/modal__close-button_pic.css);
 @import url(../blocks/form/form.css);
 
 
