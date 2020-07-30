@@ -1,6 +1,6 @@
 // Объявил переменные редактирующей модалки
 const modalEdit = document.querySelector('.modal_edit-profile');
-const openModelButton = document.querySelector('.profile-info__edit-button');
+const openModalButton = document.querySelector('.profile-info__edit-button');
 const closeModalButton = document.querySelector('.modal__close-button');
 
 // Объявил переменные добавляющей модалки
@@ -22,40 +22,48 @@ const closePic = modalImg.querySelector('.modal__close-button');
 const cardTemplate = document.querySelector('.template-card').content.querySelector('.element');
 const cardImageModal = document.querySelector('.modal__img');
 const cardSignatureModal = document.querySelector('.modal__signature');
+const modal = document.querySelector('.modal');
 
-// открытие и закрытие редактирующей формы
-function toggleEditModal() {
-    modalEdit.classList.toggle('modal_opened')
+// открытие и закрытие модалки
+function toggleModal(modal) {
+    modal.classList.toggle('modal_opened')
 }
 
-// открытие и закрытие добавочной формы
-function toggleAddModal() {
-    modalAdd.classList.toggle('modal_opened')
-}
+
+// Добавил событие открытия и закрытия к редактирующей форме
+openModalButton.addEventListener('click', () => toggleModal(modalEdit));
+closeModalButton.addEventListener('click', () => toggleModal(modalEdit));
+// Добавил событие открытия и закрытия к добавляющей форме
+openModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
+closeModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
+
+
+
 // открытие и закрытие картинки
 function togglePicModal(){
     modalImg.classList.toggle('modal_opened')
 }
 
-
+function modalValueMeaning () {
     nameValue.value = name.textContent;
     textValue.value = text.textContent;
+    toggleModal(modalEdit)
 
-
+}
 // Добавление карточки
 const formElementAdd = document.querySelector('.modal_add-card');
 
-const card = document.querySelector('.elements');
+const cardContainer = document.querySelector('.elements');
 
 function renderCard(data) {
    
-    card.prepend(createCard(data));
+    cardContainer.prepend(createCard(data));
 
 }
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
     renderCard({name: designationValue.value, link: linkValue.value});
-    toggleAddModal (modalAdd);
+    toggleModal (modalAdd);
 }
 
 // Находим форму в DOM
@@ -71,21 +79,18 @@ function formSubmitHandler (evt) {
     // Находим поля формы в DOM
     
 
-    name.textContent = nameValue.value;
-    text.textContent = textValue.value;
-    openCloseModal(modalEdit);
+    
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
-// Добавил событие открытия и закрытия к редактирующей форме
-openModelButton.addEventListener('click', toggleEditModal);
-closeModalButton.addEventListener('click', toggleEditModal);
 
-// Добавил событие открытия и закрытия к добавляющей форме
-openModalAddButton.addEventListener('click', toggleAddModal);
-closeModalAddButton.addEventListener('click', toggleAddModal);
+
+
+
+
+
 
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCardSubmitHandler);
@@ -146,7 +151,7 @@ function createCard(data) {
     cardImage.addEventListener('click', () => {
         cardImageModal.src = data.link;
         cardSignatureModal.textContent = data.name;
-        cardImage.addEventListener('click', togglePicModal);
+        togglePicModal ()
       });
 
       

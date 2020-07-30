@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcb92b9c-2dc4-4002-91c8-28288c9eef24" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +43,20 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/mesto/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/script.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Node.js.script.js" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -57,6 +71,8 @@
       <workItem from="1595579293485" duration="938000" />
       <workItem from="1595682181983" duration="353000" />
       <workItem from="1595682709868" duration="1430000" />
+      <workItem from="1596051831857" duration="341000" />
+      <workItem from="1596059794573" duration="136000" />
     </task>
     <servers />
   </component>
@@ -76,13 +92,17 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="404" y="131" key="#script.js" timestamp="1596052048911">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="404" y="131" key="#script.js/0.23.1440.877@0.23.1440.877" timestamp="1596052048911" />
     <state x="157" y="103" key="SettingsEditor" timestamp="1595682803869">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="157" y="103" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1595682803869" />
-    <state x="385" y="211" key="run.anything.popup" timestamp="1595057320934">
+    <state x="385" y="211" key="run.anything.popup" timestamp="1596052011533">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="385" y="211" key="run.anything.popup/0.23.1440.877@0.23.1440.877" timestamp="1595057320934" />
+    <state x="385" y="211" key="run.anything.popup/0.23.1440.877@0.23.1440.877" timestamp="1596052011533" />
   </component>
 </project>
