@@ -26,30 +26,23 @@ const modal = document.querySelector('.modal');
 
 // открытие и закрытие модалки
 function toggleModal(modal) {
-    modal.classList.toggle('modal_opened')
+    modal.classList.toggle('modal_opened');
+    
 }
 
 
 // Добавил событие открытия и закрытия к редактирующей форме
-openModalButton.addEventListener('click', () => toggleModal(modalEdit));
+openModalButton.addEventListener('click', () => {
+    nameValue.value = name.textContent;
+    textValue.value = text.textContent;
+    toggleModal(modalEdit)});
 closeModalButton.addEventListener('click', () => toggleModal(modalEdit));
 // Добавил событие открытия и закрытия к добавляющей форме
 openModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
 closeModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
+// Добавил событие закрытия к изображению карточки
+closePic.addEventListener('click', () => toggleModal(modalImg));
 
-
-
-// открытие и закрытие картинки
-function togglePicModal(){
-    modalImg.classList.toggle('modal_opened')
-}
-
-function modalValueMeaning () {
-    nameValue.value = name.textContent;
-    textValue.value = text.textContent;
-    toggleModal(modalEdit)
-
-}
 // Добавление карточки
 const formElementAdd = document.querySelector('.modal_add-card');
 
@@ -77,21 +70,15 @@ function formSubmitHandler (evt) {
                         // О том, как это делать, расскажем позже.
 
     // Находим поля формы в DOM
-    
+    name.textContent = nameValue.value; 
+    text.textContent = textValue.value; 
+    toggleModal(modalEdit);
 
     
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-
-
-
-
-
-
-
-
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCardSubmitHandler);
 
@@ -151,15 +138,13 @@ function createCard(data) {
     cardImage.addEventListener('click', () => {
         cardImageModal.src = data.link;
         cardSignatureModal.textContent = data.name;
-        togglePicModal ()
+        toggleModal (modalImg);
       });
-
-      
       
     return cardElement;
 }
 
-closePic.addEventListener('click', togglePicModal);
+
 
 initialCards.forEach((data) => {
     renderCard(data);
