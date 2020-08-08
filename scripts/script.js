@@ -29,6 +29,30 @@ function toggleModal(modal) {
     modal.classList.toggle('modal_opened');
     
 }
+// открытие и закрытие модалки нажатием на кнопку Esc
+document.addEventListener ('keydown', function(evt) {
+    if (evt.key === 'Escape' && modalEdit.classList.contains('modal_opened')) {
+        toggleModal(modalEdit);
+    };
+    if (evt.key === 'Escape' && modalAdd.classList.contains('modal_opened')) {
+        toggleModal(modalAdd);
+    };
+    if (evt.key === 'Escape' && modalImg.classList.contains('modal_opened')) {
+        toggleModal(modalImg);
+    };
+});
+// открытие и закрытие модалки по клику на оверлей
+document.addEventListener ('click', function(evt) {
+    if (evt.target === modalEdit) {
+        toggleModal(modalEdit);
+    };
+    if (evt.target === modalAdd) {
+        toggleModal(modalAdd);
+     };
+    if (evt.target === modalImg) {
+        toggleModal(modalImg);
+    };
+});
 
 
 // Добавил событие открытия и закрытия к редактирующей форме
@@ -36,6 +60,7 @@ openModalButton.addEventListener('click', () => {
     nameValue.value = name.textContent;
     textValue.value = text.textContent;
     toggleModal(modalEdit)});
+    
 closeModalButton.addEventListener('click', () => toggleModal(modalEdit));
 // Добавил событие открытия и закрытия к добавляющей форме
 openModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
@@ -73,6 +98,7 @@ function formSubmitHandler (evt) {
     name.textContent = nameValue.value; 
     text.textContent = textValue.value; 
     toggleModal(modalEdit);
+    
 
     
 }
@@ -149,3 +175,4 @@ function createCard(data) {
 initialCards.forEach((data) => {
     renderCard(data);
 })
+

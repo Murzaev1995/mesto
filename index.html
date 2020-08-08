@@ -45,22 +45,26 @@
     <div class="modal modal_edit-profile">
         <div class="modal__container">
             <button aria-label="Закрыть" class="modal__close-button" type="button"></button>
-            <form action="#" class="form" name="type-form">
+            <form action="#" class="form" name="type-form" novalidate>
                 <h3 class="form__title">Редактировать профиль</h3>
-                <input type="text" class="form__item form__item_name" name="name">
-                <input type="text" class="form__item form__item_text" name="text">
-                <button aria-label="Сохранить" class="form__save-button" type="submit"></button>
+                <input type="text" class="form__item form__item_name form__item_error" name="name" minlength="2" maxlength="40" autocomplete="off" required>
+                <span class="form__input-error form__input-error_line-1" id="name-error"></span>
+                <input type="text" class="form__item form__item_text form__item_error" name="text" minlength="2" maxlength="200" autocomplete="off" required>
+                <span class="form__input-error form__input-error_line-2" id="text-error"></span>
+                <button aria-label="Сохранить" class="form__save-button" type="submit" disabled>Сохранить</button>
             </form>
         </div>
     </div>
     <div class="modal modal_add-card">
         <div class="modal__container">
             <button aria-label="Закрыть" class="modal__close-button" type="button"></button>
-            <form action="#" class="form" name="type-form">
+            <form action="#" class="form" name="type-form" novalidate>
                 <h3 class="form__title">Новое место</h3>
-                <input type="text" class="form__item form__item_designation" name="designation" placeholder="Название">
-                <input type="text" class="form__item form__item_link" name="link" placeholder="Ссылка на картинку">
-                <button aria-label="Сохранить" class="form__save-button" type="submit"></button>
+                <input type="text" class="form__item form__item_designation form__item_error" name="designation" placeholder="Название" minlength="1" maxlength="40" autocomplete="off" required>
+                <span class="form__input-error form__input-error_line-1" id="designation-error"></span>
+                <input type="url" class="form__item form__item_link form__item_error" name="link" placeholder="Ссылка на картинку" autocomplete="off" required>
+                <span class="form__input-error form__input-error_line-2" id="link-error"></span>
+                <button aria-label="Сохранить" class="form__save-button" type="submit" disabled>Создать</button>
             </form>
         </div>
     </div>
@@ -82,6 +86,7 @@
 
         </div>
     </template>
-    <script src="./script.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/validation.js"></script>
 </body>
 </html>

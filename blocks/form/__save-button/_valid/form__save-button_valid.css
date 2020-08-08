@@ -1,0 +1,11 @@
+.form__save-button_valid{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+    cursor: pointer;
+}
+.form__save-button_valid:hover{
+    opacity: 0.8;
+}
