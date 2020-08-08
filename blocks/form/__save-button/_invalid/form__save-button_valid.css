@@ -1,0 +1,11 @@
+.form__save-button_invalid{
+    cursor: none;
+    background-color: #fff;
+    opacity: 0.2;
+    cursor: unset;
+    outline: none;
+    color: #000;
+}
+.form__save-button_invalid:hover{
+    opacity: 0.2;
+}

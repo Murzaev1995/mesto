@@ -2,7 +2,7 @@ const object = {
     formSelector: '.form',
     inputSelector: '.form__item',
     submitButtonSelector: '.form__save-button',
-    activeButtonClass: 'form__save-button_valid',
+    activeButtonClass: 'form__save-button_invalid',
     inputErrorClass: 'form__item_error',
     errorClass: 'form__input-error'
   };
@@ -63,10 +63,10 @@ const object = {
 
   const toggleButtonState = (inputList, buttonElement, obj) => {
     if (invalidInput(inputList)) {
-      buttonElement.classList.remove(obj.activeButtonClass);
+      buttonElement.classList.add(obj.activeButtonClass);
       buttonElement.disabled = true;
     } else {
-      buttonElement.classList.add(obj.activeButtonClass);
+      buttonElement.classList.remove(obj.activeButtonClass);
       buttonElement.disabled = false;
     }
   }

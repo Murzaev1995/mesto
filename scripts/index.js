@@ -24,33 +24,36 @@ const cardImageModal = document.querySelector('.modal__img');
 const cardSignatureModal = document.querySelector('.modal__signature');
 const modal = document.querySelector('.modal');
 
-// открытие и закрытие модалки
-function toggleModal(modal) {
-    modal.classList.toggle('modal_opened');
+// открытие модалки
+function openModal(modal) {
+    modal.classList.add('modal_opened');
+    document.addEventListener('keydown', closeEsc);
     
 }
+// закрытие модалки 
+function closeModal(modal) {
+    modal.classList.remove('modal_opened');
+    document.removeEventListener('keydown', closeEsc);
+}
 // открытие и закрытие модалки нажатием на кнопку Esc
-document.addEventListener ('keydown', function(evt) {
-    if (evt.key === 'Escape' && modalEdit.classList.contains('modal_opened')) {
-        toggleModal(modalEdit);
-    };
-    if (evt.key === 'Escape' && modalAdd.classList.contains('modal_opened')) {
-        toggleModal(modalAdd);
-    };
-    if (evt.key === 'Escape' && modalImg.classList.contains('modal_opened')) {
-        toggleModal(modalImg);
-    };
-});
+function closeEsc(evt) {
+    const modalOpened = document.querySelector('.modal_opened');
+    if (evt.key === "Escape") {
+      closeModal(modalOpened);
+    }
+  }
+  
+
 // открытие и закрытие модалки по клику на оверлей
 document.addEventListener ('click', function(evt) {
     if (evt.target === modalEdit) {
-        toggleModal(modalEdit);
+        closeModal(modalEdit);
     };
     if (evt.target === modalAdd) {
-        toggleModal(modalAdd);
+        closeModal(modalAdd);
      };
     if (evt.target === modalImg) {
-        toggleModal(modalImg);
+        closeModal(modalImg);
     };
 });
 
@@ -59,14 +62,29 @@ document.addEventListener ('click', function(evt) {
 openModalButton.addEventListener('click', () => {
     nameValue.value = name.textContent;
     textValue.value = text.textContent;
-    toggleModal(modalEdit)});
+    openModal(modalEdit);
+});
     
-closeModalButton.addEventListener('click', () => toggleModal(modalEdit));
+closeModalButton.addEventListener('click', () => {
+    closeModal(modalEdit);
+}); 
 // Добавил событие открытия и закрытия к добавляющей форме
-openModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
-closeModalAddButton.addEventListener('click', () => toggleModal(modalAdd));
+openModalAddButton.addEventListener('click', () => {
+    const diactiveSaveButton = modalAdd.querySelector('.form__save-button');
+    diactiveSaveButton.classList.add('form__save-button_invalid');
+    diactiveSaveButton.disabled = true
+
+    designationValue.value = '';
+    linkValue.value = '';
+    openModal(modalAdd);
+});
+closeModalAddButton.addEventListener('click', () => {
+    closeModal(modalAdd);
+} );
 // Добавил событие закрытия к изображению карточки
-closePic.addEventListener('click', () => toggleModal(modalImg));
+closePic.addEventListener('click', () => {
+    closeModal(modalImg)
+} );
 
 // Добавление карточки
 const formElementAdd = document.querySelector('.modal_add-card');
@@ -164,7 +182,7 @@ function createCard(data) {
     cardImage.addEventListener('click', () => {
         cardImageModal.src = data.link;
         cardSignatureModal.textContent = data.name;
-        toggleModal (modalImg);
+        openModal (modalImg);
       });
       
     return cardElement;
