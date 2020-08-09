@@ -99,7 +99,7 @@ function renderCard(data) {
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
     renderCard({name: designationValue.value, link: linkValue.value});
-    toggleModal (modalAdd);
+    closeModal (modalAdd);
 }
 
 // Находим форму в DOM
@@ -115,7 +115,7 @@ function formSubmitHandler (evt) {
     // Находим поля формы в DOM
     name.textContent = nameValue.value; 
     text.textContent = textValue.value; 
-    toggleModal(modalEdit);
+    closeModal(modalEdit);
     
 
     
