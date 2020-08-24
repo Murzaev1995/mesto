@@ -1,3 +1,7 @@
+import {Card} from "../scripts/Card.js";
+import {FormValidator} from "../scripts/FormValidator.js";
+
+
 // Объявил переменные редактирующей модалки
 const modalEdit = document.querySelector('.modal_edit-profile');
 const openModalButton = document.querySelector('.profile-info__edit-button');
@@ -19,42 +23,47 @@ const linkValue = modalAdd.querySelector('.form__item_link');
 // находим 3 модалку
 const modalImg = document.querySelector('.modal_pic');
 const closePic = modalImg.querySelector('.modal__close-button');
-const cardTemplate = document.querySelector('.template-card').content.querySelector('.element');
-const cardImageModal = document.querySelector('.modal__img');
-const cardSignatureModal = document.querySelector('.modal__signature');
-const modal = document.querySelector('.modal');
+
+const object = {
+    formSelector: '.form',
+    inputSelector: '.form__item',
+    submitButtonSelector: '.form__save-button',
+    activeButtonClass: 'form__save-button_invalid',
+    inputErrorClass: 'form__item_error',
+    errorClass: 'form__input-error'
+};
 
 // открытие модалки
-function openModal(modal) {
+export function openModal(modal) {
     modal.classList.add('modal_opened');
     document.addEventListener('keydown', closeEsc);
-    
+
 }
-// закрытие модалки 
-function closeModal(modal) {
+// закрытие модалки
+export function closeModal(modal) {
     modal.classList.remove('modal_opened');
     document.removeEventListener('keydown', closeEsc);
 }
 // открытие и закрытие модалки нажатием на кнопку Esc
-function closeEsc(evt) {
+export function closeEsc(evt) {
     const modalOpened = document.querySelector('.modal_opened');
     if (evt.key === "Escape") {
       closeModal(modalOpened);
     }
   }
-  
+
 
 // открытие и закрытие модалки по клику на оверлей
 document.addEventListener ('click', function(evt) {
     if (evt.target === modalEdit) {
         closeModal(modalEdit);
-    };
+    }
     if (evt.target === modalAdd) {
         closeModal(modalAdd);
-     };
+     }
     if (evt.target === modalImg) {
         closeModal(modalImg);
-    };
+    }
 });
 
 
@@ -91,16 +100,14 @@ const formElementAdd = document.querySelector('.modal_add-card');
 
 const cardContainer = document.querySelector('.elements');
 
-function renderCard(data) {
-   
-    cardContainer.prepend(createCard(data));
-
-}
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
-    renderCard({name: designationValue.value, link: linkValue.value});
+    const card = new Card({name: designationValue.value, link: linkValue.value}, '.template_card');
+    const cardElement = card.renderCard();
+    cardContainer.prepend(cardElement);
     closeModal (modalAdd);
 }
+
 
 // Находим форму в DOM
 const formElement = document.querySelector('.modal_edit-profile');
@@ -116,9 +123,6 @@ function formSubmitHandler (evt) {
     name.textContent = nameValue.value; 
     text.textContent = textValue.value; 
     closeModal(modalEdit);
-    
-
-    
 }
 
 // Прикрепляем обработчик к форме:
@@ -126,71 +130,8 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', addCardSubmitHandler);
 
+const validationEditInput = new FormValidator(modalEdit, object);
+const validationAddInput = new FormValidator(modalAdd, object);
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-
-function createCard(data) {
-    
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.element__img');
-    const cardTitle = cardElement.querySelector('.element__title');
-    const cardLikeButton = cardElement.querySelector('.element__button-like');
-    const cardDeleteButton = cardElement.querySelector('.element__button-delete');
-    
-    
-    
-    
-    cardLikeButton.addEventListener('click', function(evt) {
-        evt.target.classList.toggle('element__button-like_pushed');
-    });
-
-    cardDeleteButton.addEventListener('click', function(evt) {
-        evt.target.closest('.element').remove();
-    });
-    
-
-    cardTitle.textContent = data.name;
-    cardImage.src = data.link;
-    
-    
-    cardImage.addEventListener('click', () => {
-        cardImageModal.src = data.link;
-        cardSignatureModal.textContent = data.name;
-        openModal (modalImg);
-      });
-      
-    return cardElement;
-}
-
-
-
-initialCards.forEach((data) => {
-    renderCard(data);
-})
-
+validationEditInput.enableValidation();
+validationAddInput.enableValidation();
