@@ -1,5 +1,6 @@
-export {Card}
-export {initialCards}
+export {Card};
+export {initialCards};
+import {closeEsc} from "../scripts/index.js";
 
 const modalImg = document.querySelector('.modal_pic');
 const cardImageModal = document.querySelector('.modal__img');
@@ -63,11 +64,13 @@ class Card {
         cardImageModal.src = this._image;
         cardSignatureModal.textContent = this._text;
         modalImg.classList.add('modal_opened');
+        document.addEventListener('keydown', closeEsc);
     }
     _handleClosePopup() {
         cardImageModal.src = '';
         cardSignatureModal.textContent = '';
         modalImg.classList.remove('modal_opened');
+        document.removeEventListener('keydown', closeEsc);
     }
     _setEventListener() {
         this._element.querySelector('.element__img').addEventListener('click', () => {

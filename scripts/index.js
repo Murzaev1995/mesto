@@ -34,17 +34,17 @@ const object = {
 };
 
 // открытие модалки
-export function openModal(modal) {
+function openModal(modal) {
     modal.classList.add('modal_opened');
     document.addEventListener('keydown', closeEsc);
 
 }
 // закрытие модалки
-export function closeModal(modal) {
+function closeModal(modal) {
     modal.classList.remove('modal_opened');
     document.removeEventListener('keydown', closeEsc);
 }
-// открытие и закрытие модалки нажатием на кнопку Esc
+//закрытие модалки нажатием на кнопку Esc
 export function closeEsc(evt) {
     const modalOpened = document.querySelector('.modal_opened');
     if (evt.key === "Escape") {
@@ -53,7 +53,7 @@ export function closeEsc(evt) {
   }
 
 
-// открытие и закрытие модалки по клику на оверлей
+//закрытие модалки по клику на оверлей
 document.addEventListener ('click', function(evt) {
     if (evt.target === modalEdit) {
         closeModal(modalEdit);
@@ -90,10 +90,7 @@ openModalAddButton.addEventListener('click', () => {
 closeModalAddButton.addEventListener('click', () => {
     closeModal(modalAdd);
 } );
-// Добавил событие закрытия к изображению карточки
-closePic.addEventListener('click', () => {
-    closeModal(modalImg)
-} );
+
 
 // Добавление карточки
 const formElementAdd = document.querySelector('.modal_add-card');
