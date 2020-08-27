@@ -35,14 +35,14 @@ const initialCards = [
 ];
 
 class Card {
-    constructor (data) {
+    constructor (data, cardSelector) {
         this._text = data.name;
         this._image = data.link;
-
+        this._cardSelector = cardSelector
     }
     _getTemplate() {
         const cardElement = document
-            .querySelector('.template-card')
+            .querySelector(this._cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true);
@@ -54,10 +54,7 @@ class Card {
 
         this._element.querySelector('.element__img').src = this._image;
         this._element.querySelector('.element__title').textContent = this._text;
-
-
         return this._element;
-
     }
 
     _handleOpenPopup() {
@@ -70,7 +67,7 @@ class Card {
         cardImageModal.src = '';
         cardSignatureModal.textContent = '';
         modalImg.classList.remove('modal_opened');
-        document.removeEventListener('keydown', closeEsc);
+        document.removeEventListener('keyup', closeEsc);
     }
     _setEventListener() {
         this._element.querySelector('.element__img').addEventListener('click', () => {
@@ -87,9 +84,3 @@ class Card {
         });
     }
 }
-initialCards.forEach((item) => {
-    const card = new Card(item, '.template-card');
-    const cardElement = card.renderCard();
-
-    document.querySelector('.elements').append(cardElement);
-})

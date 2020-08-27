@@ -1,4 +1,4 @@
-import {Card} from "../scripts/Card.js";
+import {Card, initialCards} from "../scripts/Card.js";
 import {FormValidator} from "../scripts/FormValidator.js";
 
 
@@ -22,7 +22,6 @@ const designationValue = modalAdd.querySelector('.form__item_designation');
 const linkValue = modalAdd.querySelector('.form__item_link');
 // находим 3 модалку
 const modalImg = document.querySelector('.modal_pic');
-const closePic = modalImg.querySelector('.modal__close-button');
 
 const object = {
     formSelector: '.form',
@@ -99,12 +98,18 @@ const cardContainer = document.querySelector('.elements');
 
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
-    const card = new Card({name: designationValue.value, link: linkValue.value}, '.template_card');
+    const card = new Card({name: designationValue.value, link: linkValue.value}, '#template_card');
     const cardElement = card.renderCard();
     cardContainer.prepend(cardElement);
     closeModal (modalAdd);
-}
+};
 
+initialCards.forEach((item) => {
+    const card = new Card(item, '#template-card');
+    const cardElement = card.renderCard();
+
+    document.querySelector('.elements').append(cardElement);
+});
 
 // Находим форму в DOM
 const formElement = document.querySelector('.modal_edit-profile');
@@ -118,7 +123,7 @@ function formSubmitHandler (evt) {
 
     // Находим поля формы в DOM
     name.textContent = nameValue.value; 
-    text.textContent = textValue.value; 
+    text.textContent = textValue.value;
     closeModal(modalEdit);
 }
 
