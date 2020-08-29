@@ -98,7 +98,7 @@ const cardContainer = document.querySelector('.elements');
 
 function addCardSubmitHandler (evt) {
     evt.preventDefault();
-    const card = new Card({name: designationValue.value, link: linkValue.value}, '#template_card');
+    const card = new Card({name: designationValue.value, link: linkValue.value}, '#template-card');
     const cardElement = card.renderCard();
     cardContainer.prepend(cardElement);
     closeModal (modalAdd);

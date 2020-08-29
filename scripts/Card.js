@@ -41,6 +41,8 @@ class Card {
         this._cardSelector = cardSelector
     }
     _getTemplate() {
+
+        console.log(this._cardSelector)
         const cardElement = document
             .querySelector(this._cardSelector)
             .content
