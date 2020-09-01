@@ -6,11 +6,15 @@ import {FormValidator} from "../scripts/FormValidator.js";
 const modalEdit = document.querySelector('.modal_edit-profile');
 const openModalButton = document.querySelector('.profile-info__edit-button');
 const closeModalButton = document.querySelector('.modal__close-button');
+const editForm = modalEdit.querySelector('.form');
+const editButton = modalEdit.querySelector('.form__save-button');
 
 // Объявил переменные добавляющей модалки
 const modalAdd = document.querySelector('.modal_add-card');
 const openModalAddButton = document.querySelector('.profile__add-button');
 const closeModalAddButton = modalAdd.querySelector('.modal__close-button');
+const addForm = modalAdd.querySelector('.form');
+const addButton = modalAdd.querySelector('.form__save-button');
 
 const name = document.querySelector('.profile-info__title');
 const text = document.querySelector('.profile-info__subtitle');
@@ -30,6 +34,32 @@ const object = {
     activeButtonClass: 'form__save-button_invalid',
     inputErrorClass: 'form__item_error',
     errorClass: 'form__input-error'
+};
+
+function removeErrors (formElement, inputElement) {
+    const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+    inputElement.classList.remove('form__item_error');
+    errorElement.classList.remove('form__input-error');
+    errorElement.textContent = '';
+};
+
+// обнуление ошибок при открытие добавляющей формы
+function addCloseNoError () {
+    openModal(modalAdd);
+    removeErrors(addForm, designationValue);
+    removeErrors(addForm, linkValue);
+    addButton.classList.add('form__save-button_invalid');
+    addButton.disabled = true;
+    addForm.reset();
+};
+
+// обнуление ошибок при открытие редактирующей формы
+function editCloseNoError () {
+    removeErrors(editForm, nameValue);
+    removeErrors(editForm, textValue);
+    editButton.classList.remove('form__save-button_invalid');
+    editButton.disabled = false;
+    openModal(modalEdit);
 };
 
 // открытие модалки
@@ -59,6 +89,7 @@ document.addEventListener ('click', function(evt) {
     }
     if (evt.target === modalAdd) {
         closeModal(modalAdd);
+        addCloseNoError()
      }
     if (evt.target === modalImg) {
         closeModal(modalImg);
@@ -71,10 +102,12 @@ openModalButton.addEventListener('click', () => {
     nameValue.value = name.textContent;
     textValue.value = text.textContent;
     openModal(modalEdit);
+    editCloseNoError();
 });
     
 closeModalButton.addEventListener('click', () => {
     closeModal(modalEdit);
+
 }); 
 // Добавил событие открытия и закрытия к добавляющей форме
 openModalAddButton.addEventListener('click', () => {
@@ -85,6 +118,7 @@ openModalAddButton.addEventListener('click', () => {
     designationValue.value = '';
     linkValue.value = '';
     openModal(modalAdd);
+    addCloseNoError();
 });
 closeModalAddButton.addEventListener('click', () => {
     closeModal(modalAdd);
@@ -102,6 +136,7 @@ function addCardSubmitHandler (evt) {
     const cardElement = card.renderCard();
     cardContainer.prepend(cardElement);
     closeModal (modalAdd);
+
 };
 
 initialCards.forEach((item) => {

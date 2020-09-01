@@ -13,9 +13,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    display: none;
+    visibility: hidden;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: visibility .3s ease,opacity .3s ease-in-out;
+    display: flex;
 }
 @media screen and (max-width: 560px){
     .modal{
